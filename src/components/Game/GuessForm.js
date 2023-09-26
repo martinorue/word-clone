@@ -17,11 +17,16 @@ export default function GuessForm({ guesses, setGuesses }) {
 
     const handleSubmitGuess = (event) => {
         event.preventDefault();
-        if (guesses?.length === NUM_OF_GUESSES_ALLOWED) return;
+        //ir contando los guesses hasta llegar a NUm_OF_GUESSES_ALLOWED
+
+        // if (guesses?.length === NUM_OF_GUESSES_ALLOWED) return;
         if (guess?.value.length === 5) {
             console.log({ guess });
             setGuess({});
-            setGuesses((prevGuesses) => [...prevGuesses, guess]);
+            const nextGuesses = [...guesses];
+            console.log(nextGuesses);
+            nextGuesses[0] = guess;
+            setGuesses(nextGuesses);
         }
     };
 
