@@ -1,20 +1,27 @@
 import React from 'react';
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
-export default function GuessForm() {
-    const [guess, setGuess] = React.useState('');
+export default function GuessForm({ guesses, setGuesses }) {
+    const [guess, setGuess] = React.useState({});
 
     const handleChangeGuess = (event) => {
         const inputText = event.target.value;
-        const lettersOnly = inputText.replace(/[^A-Za-z]/g, ''); // Filtra y acepta solo letras
+        const lettersOnly = inputText.replace(/[^A-Za-z]/g, '').slice(0, 5); // Filtra y acepta solo letras y hasta 5 caracteres
 
-        setGuess(lettersOnly.toUpperCase());
+        const newGuess = {
+            id: crypto.randomUUID(),
+            value: lettersOnly.toUpperCase()
+        };
+        setGuess(newGuess);
     };
 
     const handleSubmitGuess = (event) => {
         event.preventDefault();
-        if (guess.length === 5) {
+        if (guesses?.length === NUM_OF_GUESSES_ALLOWED) return;
+        if (guess?.value.length === 5) {
             console.log({ guess });
-            setGuess('');
+            setGuess({});
+            setGuesses((prevGuesses) => [...prevGuesses, guess]);
         }
     };
 
@@ -28,7 +35,7 @@ export default function GuessForm() {
             <input
                 type="text"
                 className="guess-input"
-                value={guess}
+                value={guess.value || ''}
                 onChange={handleChangeGuess}
                 pattern="[A-Za-z]{5}"
             />
