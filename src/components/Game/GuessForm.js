@@ -6,10 +6,11 @@ export default function GuessForm({
     setGuesses,
     gameStatus,
     setGameStatus,
+    numOfGuesses,
+    setNumOfGuesses,
     answer
 }) {
     const [guess, setGuess] = React.useState({});
-    const [numOfGuesses, setNumOfGuesses] = React.useState(0);
 
     const handleChangeGuess = (event) => {
         const inputText = event.target.value;

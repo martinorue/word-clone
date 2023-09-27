@@ -1,6 +1,6 @@
 import { status } from '../../constants';
 
-export default function Banner({ gameStatus }) {
+export default function Banner({ numOfGuesses, gameStatus }) {
     const bannerType = {
         won: 'happy',
         lost: 'sad'
@@ -11,8 +11,11 @@ export default function Banner({ gameStatus }) {
     if (gameStatus === status.WON) {
         bannerComponent = (
             <p>
-                <strong>Congratulations!</strong> Got it in
-                <strong>3 guesses</strong>.
+                <strong>Congratulations!</strong> Got it in{' '}
+                <strong>
+                    {`${numOfGuesses} 
+                ${numOfGuesses > 1 ? 'guesses' : 'guess'} `}
+                </strong>
             </p>
         );
     }

@@ -25,6 +25,7 @@ function Game() {
 
     const [guesses, setGuesses] = React.useState(initialGuesses());
     const [gameStatus, setGameStatus] = React.useState('');
+    const [numOfGuesses, setNumOfGuesses] = React.useState(0);
     return (
         <>
             <Guesses
@@ -32,13 +33,17 @@ function Game() {
                 answer={answer}
                 setGameStatus={setGameStatus}
             />
-            {gameStatus !== '' && <Banner gameStatus={gameStatus} />}
+            {gameStatus !== '' && (
+                <Banner gameStatus={gameStatus} numOfGuesses={numOfGuesses} />
+            )}
             <GuessForm
                 guesses={guesses}
                 answer={answer}
                 setGuesses={setGuesses}
                 gameStatus={gameStatus}
                 setGameStatus={setGameStatus}
+                numOfGuesses={numOfGuesses}
+                setNumOfGuesses={setNumOfGuesses}
             />
         </>
     );
