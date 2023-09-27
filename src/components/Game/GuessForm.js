@@ -1,7 +1,13 @@
 import React from 'react';
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import { NUM_OF_GUESSES_ALLOWED, status } from '../../constants';
 
-export default function GuessForm({ guesses, setGuesses }) {
+export default function GuessForm({
+    guesses,
+    setGuesses,
+    gameStatus,
+    setGameStatus,
+    answer
+}) {
     const [guess, setGuess] = React.useState({});
     const [numOfGuesses, setNumOfGuesses] = React.useState(0);
 
@@ -19,8 +25,15 @@ export default function GuessForm({ guesses, setGuesses }) {
     const handleSubmitGuess = (event) => {
         event.preventDefault();
         if (!guess.value) return;
-        if (numOfGuesses === NUM_OF_GUESSES_ALLOWED) return;
         if (guess.value.length !== 5) return;
+        if (numOfGuesses === NUM_OF_GUESSES_ALLOWED) return;
+
+        if (guess.value === answer) {
+            setGameStatus(status.WON);
+        }
+        if (numOfGuesses === NUM_OF_GUESSES_ALLOWED - 1) {
+            setGameStatus(status.LOST);
+        }
 
         setNumOfGuesses(numOfGuesses + 1);
         setGuess({});
@@ -37,6 +50,7 @@ export default function GuessForm({ guesses, setGuesses }) {
         >
             <label htmlFor="guess-input">Enter guess:</label>
             <input
+                disabled={gameStatus !== ''}
                 type="text"
                 className="guess-input"
                 value={guess.value || ''}
