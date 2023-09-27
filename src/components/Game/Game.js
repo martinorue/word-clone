@@ -16,7 +16,7 @@ function Game() {
         for (let i = 0; i < 6; i++) {
             guesses.push({
                 id: crypto.randomUUID(),
-                value: ' '
+                value: ''
             });
         }
         return guesses;
@@ -25,7 +25,7 @@ function Game() {
 
     return (
         <>
-            <Guesses guesses={guesses} />
+            <Guesses guesses={guesses} answer={answer} />
             <GuessForm guesses={guesses} setGuesses={setGuesses} />
         </>
     );
