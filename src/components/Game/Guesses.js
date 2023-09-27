@@ -1,18 +1,14 @@
 import React from 'react';
 import { range } from '../../utils';
+import Guess from './Guess';
 
 export default function Guesses({ guesses }) {
-    const guessesValues = guesses.map((guess) => guess);
-    console.log(guesses);
-
     return (
         <div className="guess-results">
-            {guessesValues.map(({ id, value }) => (
+            {guesses.map(({ id, value }) => (
                 <p className="guess" key={id}>
                     {range(5).map((num) => (
-                        <span key={num} className="cell">
-                            {value[num]}
-                        </span>
+                        <Guess key={num} value={value} num={num} />
                     ))}
                 </p>
             ))}

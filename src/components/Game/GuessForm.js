@@ -3,6 +3,7 @@ import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 export default function GuessForm({ guesses, setGuesses }) {
     const [guess, setGuess] = React.useState({});
+    const [numOfGuesses, setNumOfGuesses] = React.useState(0);
 
     const handleChangeGuess = (event) => {
         const inputText = event.target.value;
@@ -17,17 +18,15 @@ export default function GuessForm({ guesses, setGuesses }) {
 
     const handleSubmitGuess = (event) => {
         event.preventDefault();
-        //ir contando los guesses hasta llegar a NUm_OF_GUESSES_ALLOWED
+        if (!guess.value) return;
+        if (numOfGuesses === NUM_OF_GUESSES_ALLOWED) return;
+        if (guess.value.length !== 5) return;
 
-        // if (guesses?.length === NUM_OF_GUESSES_ALLOWED) return;
-        if (guess?.value.length === 5) {
-            console.log({ guess });
-            setGuess({});
-            const nextGuesses = [...guesses];
-            console.log(nextGuesses);
-            nextGuesses[0] = guess;
-            setGuesses(nextGuesses);
-        }
+        setNumOfGuesses(numOfGuesses + 1);
+        setGuess({});
+        const nextGuesses = [...guesses];
+        nextGuesses[numOfGuesses] = guess;
+        setGuesses(nextGuesses);
     };
 
     return (
