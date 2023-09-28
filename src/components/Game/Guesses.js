@@ -2,7 +2,7 @@ import React from 'react';
 import { range } from '../../utils';
 import Guess from './Guess';
 
-export default function Guesses({ guesses, answer, setGameStatus }) {
+export default function Guesses({ guesses, answer }) {
     return (
         <div className="guess-results">
             {guesses.map(({ id, value }) => (

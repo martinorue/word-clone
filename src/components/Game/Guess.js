@@ -5,6 +5,6 @@ export default function Guess({ num, value, answer }) {
     }
 
     const res = checkGuess(value, answer);
-    const wordStatus = res[num].status;
-    return <span className={`cell ${wordStatus}`}>{value[num]}</span>;
+    const letterStatus = res[num].status;
+    return <span className={`cell ${letterStatus}`}>{value[num]}</span>;
 }

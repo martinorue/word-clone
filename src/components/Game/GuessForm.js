@@ -6,12 +6,12 @@ export default function GuessForm({
     setGuesses,
     gameStatus,
     setGameStatus,
+    guess,
+    setGuess,
     numOfGuesses,
     setNumOfGuesses,
     answer
 }) {
-    const [guess, setGuess] = React.useState({});
-
     const handleChangeGuess = (event) => {
         const inputText = event.target.value;
         const lettersOnly = inputText.replace(/[^A-Za-z]/g, '').slice(0, 5); // Filtra y acepta solo letras y hasta 5 caracteres
@@ -20,10 +20,12 @@ export default function GuessForm({
             id: crypto.randomUUID(),
             value: lettersOnly.toUpperCase()
         };
+        // console.log(newGuess);
         setGuess(newGuess);
     };
 
     const handleSubmitGuess = (event) => {
+        console.log('submit');
         event.preventDefault();
         if (!guess.value) return;
         if (guess.value.length !== 5) return;
