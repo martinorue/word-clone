@@ -7,6 +7,7 @@ import GuessForm from './GuessForm';
 import Guesses from './Guesses';
 import Banner from './Banner';
 import VirtualKeyboard from './VirtualKeyboard';
+import { checkGuess } from '../../game-helpers';
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
@@ -29,6 +30,10 @@ function Game() {
     const [gameStatus, setGameStatus] = React.useState('');
     const [numOfGuesses, setNumOfGuesses] = React.useState(0);
 
+    const letterStatus = guesses.map((guess) => {
+        const res = checkGuess(guess.value, answer);
+        return res;
+    });
     return (
         <>
             <Guesses
@@ -56,6 +61,7 @@ function Game() {
             />
             <VirtualKeyboard
                 guesses={guesses}
+                letterStatus={letterStatus}
                 answer={answer}
                 numOfGuesses={numOfGuesses}
             />

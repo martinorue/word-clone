@@ -20,12 +20,10 @@ export default function GuessForm({
             id: crypto.randomUUID(),
             value: lettersOnly.toUpperCase()
         };
-        // console.log(newGuess);
         setGuess(newGuess);
     };
 
     const handleSubmitGuess = (event) => {
-        console.log('submit');
         event.preventDefault();
         if (!guess.value) return;
         if (guess.value.length !== 5) return;
